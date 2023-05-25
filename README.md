@@ -1,7 +1,8 @@
 # Project Title
 
-Travel Planner
-FIND & TRAVEL
+### Travel Planner
+
+### FIND & TRAVEL
 
 ## Demo link:
 
@@ -11,7 +12,6 @@ Access my site at [eraka93.github.io](https://eraka93.github.io/)
 
 - [Setup](#setup)
 - [About The App](#about-the-app)
-- [Screenshots](#screenshots)
 - [Technologies](#technologies)
 - [Project Structure](#structure)
 
@@ -19,14 +19,14 @@ Access my site at [eraka93.github.io](https://eraka93.github.io/)
 
 - download or clone the repository
 - run `cd travel-planner`
+- Note: The project already includes an .env file for easier testing purposes. However, in a production environment, it is recommended to create your own .env file and insert the API key for the Country Layer API and the YouTube Data API.
 - run `npm install`
-  Note: The project already includes an .env file for easier testing purposes. However, in a production environment, it is recommended to create your own .env file and insert the API key for the Country Layer API and the YouTube Data API.
 - run `npm run dev`
 - open your browser and navigate to `http://localhost:5173` to view the application.
 
 ## About The App
 
-[Travel Planner] is a web application that allows users to explore different countries. It consists of three main pages:
+Travel Planner is a web application that allows users to explore different countries. It consists of three main pages:
 
 - Countries List Page:
 
@@ -41,8 +41,6 @@ Additionally, a YouTube video clip related to travel destinations in that countr
 Users can watch the video to get a glimpse of the country's attractions and tourist spots.
 Below the video, there is a comment section where users can leave comments about their experiences or ask questions related to the country.
 Users can submit their comments, which are then displayed along with the existing comments.
-
-## Screenshots
 
 ## Technologies
 
