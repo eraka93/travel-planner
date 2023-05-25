@@ -1,0 +1,90 @@
+/* src/components/CountryList.css */
+.container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.travel-guide {
+   text-align: center;
+   width: 80%;
+   padding: 20px;
+   margin-bottom: 20px;
+   border-bottom: 2px solid #ccc;
+}
+
+.travel-guide h2 {
+   font-size: 1.8rem;
+   font-weight: bold;
+   margin-bottom: 10px;
+}
+
+.travel-guide p {
+   font-size: 1.2rem;
+   color: #555;
+}
+
+.search-box {
+   margin-bottom: 20px;
+}
+
+.search-box input {
+   max-width: 300px;
+   padding: 10px;
+   font-size: 1rem;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+}
+
+.country-list {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+
+.country-card {
+   width: 200px;
+   aspect-ratio: 16/9;
+   margin: 5px;
+   padding: 10px;
+   background-color: #fff;
+   border: 1px solid #232323;
+   border-radius: 5px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+   cursor: pointer;
+   transition: transform 0.3s ease;
+   background-size: cover;
+   background-position: center;
+}
+
+.country-card:hover {
+   transform: translateY(-2px);
+}
+
+.country-name {
+   background-color: rgba(255, 255, 255, 0.6);
+   max-width: fit-content;
+   border-radius: 5px;
+   padding-inline: 5px;
+   font-size: 1.2rem;
+   font-weight: bold;
+   margin-bottom: 5px;
+   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+.country-overlay {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+   width: 100%;
+}
+
+.country-region {
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   font-size: 1rem;
+   color: #ffeeee;
+   text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.8);
+}

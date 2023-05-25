@@ -1,0 +1,34 @@
+import { Link } from "react-router-dom"
+import "./Home.css"
+
+function Home() {
+  return (
+    <div className="containter">
+      <section>
+        <h2>Welcome to the Travel Planner !</h2>{" "}
+        <h3>Place where you can explore and plan your next adventure!</h3>
+        <p>Start by selecting a country from the list below</p>
+        <Link to="all">List of Countries</Link>
+        <p>
+          Once you have selected a country, you will be able to see more details
+          about it, including:
+        </p>
+        <div className="list">
+          <ul>
+            <li>General information about the country</li>
+            <li>Interesting facts and landmarks</li>
+            <li>A YouTube video showcasing the country</li>
+            <li>User comments and reviews</li>
+          </ul>
+        </div>
+        <p>
+          Prepare to embark on a captivating journey, delving into the
+          enchanting beauty and rich cultural tapestry of diverse countries
+          across the globe!
+        </p>
+      </section>
+    </div>
+  )
+}
+
+export default Home
