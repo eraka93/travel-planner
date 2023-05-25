@@ -24,8 +24,8 @@ const Comments: React.FC<Props> = ({ country }) => {
       addComment({
         country,
         comment: {
-          author: newAuthor,
-          text: newComment,
+          author: newAuthor.length > 0 ? newAuthor : "Unknown",
+          text: newComment.length > 0 ? newComment : "Empty",
         },
       }),
     )
@@ -41,7 +41,7 @@ const Comments: React.FC<Props> = ({ country }) => {
     <div>
       <h2>Comments</h2>
       {comments.length === 0 ? (
-        <p>No comments yet.</p>
+        <p className="no-comment">No comments yet.</p>
       ) : (
         <div>
           {comments.map((comment, index) => (

@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
 import { getCountries } from "../services/api"
-import { Helmet } from "react-helmet"
 
 import Loading from "../components/Loading"
 
@@ -55,47 +54,43 @@ function Countries() {
   }
 
   if (isError) {
+    navigate("/error")
     return <div>Error occurred while fetching data</div>
   }
 
   return (
-    <>
-      <Helmet>
-        <title>List of all countries</title>
-      </Helmet>
-      <div className="container">
-        <div className="travel-guide">
-          <h2>Travel Guide</h2>
-          <p>Pick a country from the list below to start your journey.</p>
-          <p>Also you can search by country name</p>
-          <div className="search-box">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              placeholder="Search for a country..."
-            />
-          </div>
-        </div>
-        <div className="country-list">
-          {filteredCountries?.map((country) => (
-            <div
-              key={country.name}
-              className="country-card"
-              onClick={() => handleClick(country.name ?? "")}
-              style={{
-                backgroundImage: `url(https://flagcdn.com/${country.alpha2Code.toLowerCase()}.svg)`,
-              }}
-            >
-              <div className="country-overlay">
-                <div className="country-name">{country.name}</div>
-                <div className="country-region">{country.region}</div>
-              </div>
-            </div>
-          ))}
+    <div className="container">
+      <div className="travel-guide">
+        <h2>Travel Guide</h2>
+        <p>Choose a country from the list below to begin your adventure.</p>
+        <p>You can also search by country name.</p>
+        <div className="search-box">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search for a country..."
+          />
         </div>
       </div>
-    </>
+      <div className="country-list">
+        {filteredCountries?.map((country) => (
+          <div
+            key={country.name}
+            className="country-card"
+            onClick={() => handleClick(country.name ?? "")}
+            style={{
+              backgroundImage: `url(https://flagcdn.com/${country.alpha2Code.toLowerCase()}.svg)`,
+            }}
+          >
+            <div className="country-overlay">
+              <div className="country-name">{country.name}</div>
+              <div className="country-region">{country.region}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
 

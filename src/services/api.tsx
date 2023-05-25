@@ -1,12 +1,17 @@
 import axios from "axios"
 
 export const getCountries = async () => {
-  const response = await axios.get(
-    `http://api.countrylayer.com/v2/all?access_key=${
-      import.meta.env.VITE_COUNTRY_LAYER_API_KEY
-    }`,
-  )
-  return response.data
+  try {
+    const response = await axios.get(
+      `http://api.countrylayer.com/v2/all?access_key=${
+        import.meta.env.VITE_COUNTRY_LAYER_API_KEY
+      }`,
+      { timeout: 3000 },
+    )
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export const getCountry = async (countryName: string) => {
@@ -14,6 +19,7 @@ export const getCountry = async (countryName: string) => {
     `http://api.countrylayer.com/v2/name/${countryName}?access_key=${
       import.meta.env.VITE_COUNTRY_LAYER_API_KEY
     }&fullText=true`,
+    { timeout: 3000 },
   )
   return response.data[0]
 }
@@ -23,6 +29,7 @@ export const getYouTubeVideoId = async (countryName: string) => {
     const response = await axios.get(
       "https://www.googleapis.com/youtube/v3/search",
       {
+        timeout: 3000,
         params: {
           q: `${countryName} travel, best place to visit`,
           maxResults: 1,
@@ -46,6 +53,7 @@ export const getYouTubeComments = async (video_id: string) => {
     const response = await axios.get(
       "https://www.googleapis.com/youtube/v3/commentThreads",
       {
+        timeout: 3000,
         params: {
           key: import.meta.env.VITE_YOUTUBE_API_KEY,
           textFormat: "plainText",

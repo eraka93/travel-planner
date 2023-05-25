@@ -6,7 +6,6 @@ import {
   getYouTubeVideoId,
 } from "../services/api"
 import { useParams } from "react-router-dom"
-import { Helmet } from "react-helmet"
 
 import { CountryType } from "./Countries"
 import Loading from "../components/Loading"
@@ -91,94 +90,92 @@ function Country() {
 
   return (
     <>
-      <Helmet>
-        <title>{countryName}</title>
-      </Helmet>
-      <div className="country-page">
-        <h2>{country.name}</h2>
-        <div className="country-info">
-          <div className="country-info-overlay">
-            <div>
-              <p>
-                <strong>Capital:</strong> {country.capital}
-              </p>
-              <p>
-                <strong>Region:</strong> {country.region}
-              </p>
-              <p>
-                <strong>Country code:</strong> +{country.callingCodes[0]}
-              </p>
-              <p>
-                <strong>Domain:</strong> {country.topLevelDomain[0]}
-              </p>
+      <div className="container-country">
+        <div className="country">
+          <h2>{country.name}</h2>
+          <div className="country-info">
+            <div className="country-info-overlay">
+              <div>
+                <p>
+                  <strong>Capital:</strong> {country.capital}
+                </p>
+                <p>
+                  <strong>Region:</strong> {country.region}
+                </p>
+                <p>
+                  <strong>Country code:</strong> +{country.callingCodes[0]}
+                </p>
+                <p>
+                  <strong>Domain:</strong> {country.topLevelDomain[0]}
+                </p>
+              </div>
+              <img
+                className="country-flag"
+                width={120}
+                src={`https://flagcdn.com/${country.alpha2Code.toLowerCase()}.svg`}
+                alt={country.name}
+              />
             </div>
-            <img
-              className="country-flag"
-              width={120}
-              src={`https://flagcdn.com/${country.alpha2Code.toLowerCase()}.svg`}
-              alt={country.name}
-            />
-          </div>
-          <div className="youtube-video">
             <iframe
-              width="420"
-              height="280"
+              className="youtube-video"
               src={youTubeLink}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               title="Embedded youtube"
             />
-          </div>
-          {
-            <div>
-              <div className="youtube">
-                <p>
-                  <strong>YouTube comment:</strong>
-                </p>
-                <a
-                  className="youtube-button"
-                  target="_blank"
-                  rel="noopener"
-                  href={`https://www.youtube.com/watch?v=${youTubeComment?.snippet.videoId}}&lc=${youTubeComment?.snippet.topLevelComment.id}`}
-                >
-                  OPEN YOUTUBE
-                </a>
-              </div>
-              <div className="youtube-comment">
-                <img
-                  className="youtube-comment-icon"
-                  width={35}
-                  height={35}
-                  src={
-                    youTubeComment?.snippet.topLevelComment.snippet
-                      .authorProfileImageUrl
-                  }
-                  alt={
-                    youTubeComment?.snippet?.topLevelComment.snippet
-                      .authorDisplayName
-                  }
-                />
-                <div className="youtube-comment-overlay">
-                  <div className="youtube-comment-author">
-                    {
+            {
+              <div>
+                <div className="youtube">
+                  <p>
+                    <strong>YouTube comment:</strong>
+                  </p>
+                  <a
+                    className="youtube-button"
+                    target="_blank"
+                    rel="noopener"
+                    href={`https://www.youtube.com/watch?v=${youTubeComment?.snippet.videoId}}&lc=${youTubeComment?.snippet.topLevelComment.id}`}
+                  >
+                    OPEN YOUTUBE
+                  </a>
+                </div>
+                <div className="youtube-comment">
+                  <img
+                    className="youtube-comment-icon"
+                    width={35}
+                    height={35}
+                    src={
+                      youTubeComment?.snippet.topLevelComment.snippet
+                        .authorProfileImageUrl
+                    }
+                    alt={
                       youTubeComment?.snippet?.topLevelComment.snippet
                         .authorDisplayName
                     }
-                  </div>
-                  <div className="youtube-comment-text">
-                    {
-                      youTubeComment?.snippet?.topLevelComment.snippet
-                        .textDisplay
-                    }
+                  />
+                  <div className="youtube-comment-overlay">
+                    <div className="youtube-comment-author">
+                      {
+                        youTubeComment?.snippet?.topLevelComment.snippet
+                          .authorDisplayName
+                      }
+                    </div>
+                    <div className="youtube-comment-text">
+                      {
+                        youTubeComment?.snippet?.topLevelComment.snippet
+                          .textDisplay
+                      }
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          }
+            }
+          </div>
         </div>
 
-        {countryName && <Comments country={countryName} />}
+        <div className="comments-section">
+          {countryName && <Comments country={countryName} />}
+        </div>
       </div>
     </>
   )

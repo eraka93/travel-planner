@@ -5,7 +5,7 @@
    flex-wrap: wrap;
    align-items: flex-start;
    max-width: 420px;
-   border-bottom: 2px solid #555;
+   border-bottom: 1.5px solid #555;
 }
 
 .comment:last-of-type {
@@ -40,6 +40,12 @@
    padding-left: 5px;
 }
 
+h2 {
+   font-size: 28px;
+   color: #333;
+   margin-top: 0;
+}
+
 .comment-author {
    font-size: 14px;
    font-weight: bold;
@@ -58,38 +64,51 @@
 
 .comment-form {
    margin-bottom: 20px;
+   background-color: #f2f2f2;
+   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+   padding: 10px;
 }
 
 .comment-form input,
 .comment-form textarea {
    display: block;
-   width: 100%;
    padding: 10px;
    margin-bottom: 10px;
-   font-size: 1rem;
+   font-size: 14px;
    border: 1px solid #ccc;
    border-radius: 4px;
+   width: 90%;
 }
 
 .comment-form textarea {
-   height: 3rem;
+   height: 50px;
    resize: none;
 }
 
+input::placeholder,
+textarea::placeholder {
+   color: #aaa;
+   font-size: 14px;
+   font-family: inherit;
+}
+
+
 .comment-form button {
    padding: 10px 20px;
-   font-size: 1rem;
+   font-size: 14px;
    color: #fff;
    border: none;
    border-radius: 4px;
    cursor: pointer;
-}
-
-.comment-form button {
-   font-size: 1rem;
    background-color: #4caf50;
 }
 
 .comment-form button:hover {
-   background-color: #45a049;
+   background-color: #6fbd71;
+}
+
+.no-comment {
+   font-size: 24px;
+   font-weight: bold;
+   margin: 20px 0;
 }

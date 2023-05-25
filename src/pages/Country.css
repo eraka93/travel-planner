@@ -1,3 +1,26 @@
+.container-country {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   background-color: #fff;
+   min-height: 100vh;
+   padding: 20px;
+}
+
+.country {
+   width: 60%;
+}
+
+.comments-section {
+   width: 30%;
+}
+
+h2 {
+   font-size: 28px;
+   color: #333;
+   margin-top: 0;
+}
+
 .country-info {
    display: flex;
    flex-direction: column;
@@ -17,8 +40,14 @@
 }
 
 .country-info p {
-   margin: 0;
-   font-size: 0.9rem;
+   font-size: 16px;
+   color: #777;
+   margin: 0px;
+   margin-bottom: 5px;
+}
+
+.country-info strong {
+   color: #3a3939;
 }
 
 .country-flag {
@@ -28,6 +57,9 @@
 
 .youtube-video {
    margin-block: 5px;
+   align-self: center;
+   width: 100%;
+   aspect-ratio: 16/9;
 }
 
 .youtube {
@@ -39,7 +71,8 @@
 }
 
 .youtube a {
-   margin: 0
+   margin: 0;
+   text-decoration: none;
 }
 
 .youtube-comment-section {
@@ -100,4 +133,20 @@
 
 .youtube-button:hover {
    background-color: #f04141;
+}
+
+@media (max-width: 1000px) {
+   .container-country {
+      flex-direction: column;
+      justify-content: center;
+   }
+
+   .country {
+      margin-bottom: 30px;
+      width: 100%;
+   }
+
+   .comments-section {
+      width: 100%;
+   }
 }

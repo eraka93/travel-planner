@@ -7,33 +7,37 @@
 
 .travel-guide {
    text-align: center;
-   width: 80%;
-   padding: 20px;
-   margin-bottom: 20px;
-   border-bottom: 2px solid #ccc;
+   margin-bottom: 30px;
+   padding-bottom: 30px;
+   border-bottom: 1px solid #333;
 }
 
-.travel-guide h2 {
-   font-size: 1.8rem;
-   font-weight: bold;
+h2 {
+   font-size: 28px;
+   color: #333;
+   margin-top: 0;
+}
+
+p {
+   font-size: 16px;
+   color: #777;
    margin-bottom: 10px;
 }
 
-.travel-guide p {
-   font-size: 1.2rem;
-   color: #555;
-}
-
 .search-box {
-   margin-bottom: 20px;
+   margin-top: 20px;
 }
 
-.search-box input {
-   max-width: 300px;
+input[type="text"] {
    padding: 10px;
-   font-size: 1rem;
+   font-size: 16px;
    border: 1px solid #ccc;
    border-radius: 4px;
+   width: 300px;
+}
+
+input[type="text"]::placeholder {
+   color: #aaa;
 }
 
 .country-list {
@@ -43,7 +47,7 @@
 }
 
 .country-card {
-   width: 200px;
+   width: 140px;
    aspect-ratio: 16/9;
    margin: 5px;
    padding: 10px;
@@ -66,10 +70,12 @@
    max-width: fit-content;
    border-radius: 5px;
    padding-inline: 5px;
-   font-size: 1.2rem;
+   font-size: 16px;
    font-weight: bold;
    margin-bottom: 5px;
    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+   overflow: hidden;
+   text-align: left;
 }
 
 .country-overlay {
@@ -84,7 +90,7 @@
    position: absolute;
    bottom: 0;
    right: 0;
-   font-size: 1rem;
+   font-size: 14px;
    color: #ffeeee;
    text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.8);
 }
