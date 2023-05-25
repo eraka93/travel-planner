@@ -14,6 +14,7 @@ Access my site at [eraka93.github.io](https://eraka93.github.io/)
 - [About The App](#about-the-app)
 - [Technologies](#technologies)
 - [Project Structure](#structure)
+- [Data Flow](#data-flow)
 
 ## Setup
 
@@ -111,3 +112,20 @@ travel-planner/
 ```
 
 This structure represents the organization of Travel Planner project, with directories such as `src/`, `components/`, `pages/`, `services/`, `app/`, and various files like `index.html`, `App.tsx`, `index.html`, `.env`, and more.
+
+## Data Flow
+
+The data flow for the described process is as follows:
+
+1. User clicks on the "List of countries" button on the home page, redirecting them to the Countries page.
+2. The Countries page fetches the list of countries using the CountryLayer API with the API key. The API response returns an array of country objects.
+3. The country flags are displayed using the alpha-2 country code from each country object. The flag images are retrieved from the flagcdn website, which contains images of all country flags.
+4. The user can enter a country name in the search input, triggering the search handler. The search handler filters the array of countries based on the country name and displays the filtered array.
+5. When the user clicks on a country, they are redirected to the Country page.
+6. The Country page fetches country-specific data using the CountryLayer API. Additionally, it embeds a YouTube video using the YouTubeDataAPI. The video search query includes the country name in the format "{countryName} travel" or "best place to visit".
+7. The YouTubeDataAPI response returns an object containing video data, including the video ID. The video ID is used to generate the embedded video player.
+8. For YouTube comments, a similar process is followed. The video ID is used as a parameter to fetch the comments from the YouTubeDataAPI.
+9. Redux store is used to manage comments. When a user enters a comment, it is saved in the store. The comments are displayed on the specific country page. If the user returns to the same country, the comments are loaded from the store.
+10. However, if the application is reloaded, the store is cleared, and the comments are lost. To address this issue, implementing a database solution would be recommended for reading and storing comments persistently.
+
+The described data flow ensures that the application fetches country data, displays country information, embeds YouTube videos, and manages comments efficiently and consistently throughout the user's interaction.
