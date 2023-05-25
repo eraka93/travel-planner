@@ -1,61 +1,94 @@
 import { useQuery } from "@tanstack/react-query"
-import { useNavigate } from "react-router-dom"
-import { getCountries } from "../services/api"
+import { Link, useSearchParams } from "react-router-dom"
+import { CountryType, getCountries } from "../services/api"
 
 import Loading from "../components/Loading"
 
 import "./Countries.css"
-import { SetStateAction, useState } from "react"
-
-export type CountryType = {
-  name: string
-  topLevelDomain: string[]
-  alpha2Code: string
-  alpha3Code: string
-  callingCodes: string[]
-  capital: string
-  altSpellings: string[]
-  region: string
-}
+import { useMemo, useCallback } from "react"
 
 function Countries() {
-  const [searchTerm, setSearchTerm] = useState("")
-  const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const searchTerm = useMemo(() => {
+    const search = searchParams.get("search")
+    if (typeof search === "string") {
+      return search
+    }
+    return ""
+  }, [searchParams])
+
   const {
     data: allCountries,
     isLoading,
     isError,
-  } = useQuery<any, unknown, CountryType[]>({
+  } = useQuery({
     queryKey: ["allCountries"],
     queryFn: getCountries,
-    staleTime: Infinity,
-    cacheTime: Infinity,
-    refetchOnMount: false,
   })
 
-  document.title = "List of all countries"
+  const handleSearchChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const {
+        target: { value },
+      } = event
 
-  const handleSearchChange = (event: {
-    target: { value: SetStateAction<string> }
-  }) => {
-    setSearchTerm(event.target.value)
-  }
+      setSearchParams((prevState) => {
+        prevState.set("search", value)
 
-  const filteredCountries = allCountries?.filter((country) =>
-    country.name.toLowerCase().includes(searchTerm.toLowerCase()),
+        return prevState
+      })
+    },
+    [setSearchParams],
   )
 
-  function handleClick(countryName: string) {
-    navigate(`/country/${countryName}`)
+  const filteredCountries = useMemo(
+    () =>
+      allCountries?.filter((country) =>
+        country.name.toLowerCase().includes(searchTerm.toLowerCase()),
+      ),
+    [allCountries, searchTerm],
+  )
+
+  const listOfCountry = useCallback((country: CountryType) => {
+    return (
+      <Link
+        key={country.name}
+        className="country-card-link"
+        to={`/country/${country.name}`}
+        style={{
+          backgroundImage: `url(https://flagcdn.com/${country.alpha2Code.toLowerCase()}.svg)`,
+        }}
+      >
+        <div className="country-overlay">
+          <div className="country-name">{country.name}</div>
+          <div className="country-region">{country.region}</div>
+        </div>
+      </Link>
+    )
+  }, [])
+
+  const noResults = useMemo(() => {
+    if (isLoading) {
+      return false
+    }
+    return !(
+      filteredCountries &&
+      Array.isArray(filteredCountries) &&
+      filteredCountries.length > 0
+    )
+  }, [isLoading, filteredCountries])
+
+  if (isError) {
+    return (
+      <div className="container">
+        <h3>Error occurred while fetching data.</h3>
+      </div>
+    )
   }
 
   if (isLoading) {
     return <Loading />
-  }
-
-  if (isError) {
-    navigate("/error")
-    return <div>Error occurred while fetching data</div>
   }
 
   return (
@@ -74,21 +107,8 @@ function Countries() {
         </div>
       </div>
       <div className="country-list">
-        {filteredCountries?.map((country) => (
-          <div
-            key={country.name}
-            className="country-card"
-            onClick={() => handleClick(country.name ?? "")}
-            style={{
-              backgroundImage: `url(https://flagcdn.com/${country.alpha2Code.toLowerCase()}.svg)`,
-            }}
-          >
-            <div className="country-overlay">
-              <div className="country-name">{country.name}</div>
-              <div className="country-region">{country.region}</div>
-            </div>
-          </div>
-        ))}
+        {noResults && <p>No results</p>}
+        {filteredCountries?.map((country) => listOfCountry(country))}
       </div>
     </div>
   )

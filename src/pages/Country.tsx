@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import { QueryKey, useQuery } from "@tanstack/react-query"
+import { useMemo } from "react"
+import { useQuery } from "@tanstack/react-query"
 import {
   getCountry,
   getYouTubeComments,
@@ -7,85 +7,60 @@ import {
 } from "../services/api"
 import { useParams } from "react-router-dom"
 
-import { CountryType } from "./Countries"
 import Loading from "../components/Loading"
 import Comments from "../components/Comments"
 
 import "./Country.css"
 
-type YouTubeComment = {
-  kind: string
-  etag: string
-  id: string
-  snippet: {
-    videoId: string
-    topLevelComment: {
-      kind: string
-      etag: string
-      id: string
-      snippet: {
-        videoId: string
-        textDisplay: string
-        textOriginal: string
-        authorDisplayName: string
-        authorProfileImageUrl: string
-        authorChannelUrl: string
-        authorChannelId: {
-          value: string
-        }
-        canRate: boolean
-        viewerRating: string
-        likeCount: number
-        publishedAt: string
-        updatedAt: string
-      }
-    }
-    canReply: boolean
-    totalReplyCount: number
-    isPublic: boolean
-  }
-}
-
 function Country() {
-  const [youTubeLink, setYouTubeLink] = useState("")
-  const [youTubeComment, setYouTubeComment] = useState<YouTubeComment>()
-
   const { name: countryName } = useParams()
   const {
     data: country,
-    isLoading,
-    isError,
-  } = useQuery<unknown, unknown, CountryType, QueryKey>(
-    ["country", countryName],
-    () => getCountry(countryName ?? ""),
+    isLoading: isLoadingCountry,
+    isError: isErrorCountry,
+  } = useQuery(["country", countryName], () => getCountry(countryName ?? ""), {
+    enabled: !!countryName,
+  })
+
+  const {
+    data: youtubeVideoId,
+    isLoading: isLoadingVideoId,
+    isError: isErrorVideoId,
+  } = useQuery(
+    ["youtube/link", countryName],
+    () => getYouTubeVideoId(countryName ?? ""),
     {
-      staleTime: Infinity,
-      cacheTime: Infinity,
       enabled: !!countryName,
-      refetchOnMount: false,
     },
   )
 
-  useEffect(() => {
-    const fetchVideo = async () => {
-      try {
-        const videoId = await getYouTubeVideoId(countryName ?? "")
-        const commentYouTube = await getYouTubeComments(videoId)
-        setYouTubeComment(commentYouTube ?? [])
-        setYouTubeLink(`https://www.youtube.com/embed/${videoId}` ?? "")
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    fetchVideo()
-  }, [countryName])
+  const {
+    data: youTubeComment,
+    isLoading: isLoadingComment,
+    isError: isErrorComment,
+  } = useQuery(
+    ["youtube/comments", youtubeVideoId],
+    () => getYouTubeComments(youtubeVideoId),
+    {
+      enabled: !!youtubeVideoId,
+    },
+  )
 
-  if (isLoading) {
-    return <Loading />
+  const youTubeLink = useMemo(
+    () => `https://youtube.com/embed/${youtubeVideoId}`,
+    [youtubeVideoId],
+  )
+
+  if (isErrorComment || isErrorCountry || isErrorVideoId) {
+    return (
+      <div className="container">
+        <h3>Error occurred while fetching data</h3>
+      </div>
+    )
   }
 
-  if (isError) {
-    return <div>Error occurred while fetching data</div>
+  if (isLoadingCountry || isLoadingVideoId || isLoadingComment) {
+    return <Loading />
   }
 
   return (

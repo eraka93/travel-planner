@@ -46,7 +46,7 @@ input[type="text"]::placeholder {
    justify-content: center;
 }
 
-.country-card {
+.country-card-link {
    width: 140px;
    aspect-ratio: 16/9;
    margin: 5px;
@@ -54,11 +54,12 @@ input[type="text"]::placeholder {
    background-color: #fff;
    border: 1px solid #232323;
    border-radius: 5px;
-   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+   box-shadow: 0 2px 4px rgba(48, 46, 46, 0.2);
    cursor: pointer;
    transition: transform 0.3s ease;
    background-size: cover;
    background-position: center;
+   text-decoration: none;
 }
 
 .country-card:hover {
@@ -70,12 +71,14 @@ input[type="text"]::placeholder {
    max-width: fit-content;
    border-radius: 5px;
    padding-inline: 5px;
+   padding-block: 2px;
    font-size: 16px;
    font-weight: bold;
    margin-bottom: 5px;
-   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+   text-shadow: 0 1px 1px rgba(90, 87, 87, 0.8);
    overflow: hidden;
    text-align: left;
+   color: #000
 }
 
 .country-overlay {

@@ -1,73 +1,105 @@
-import axios from "axios"
+import axios, { AxiosResponse } from "axios"
 
-export const getCountries = async () => {
-  try {
-    const response = await axios.get(
-      `http://api.countrylayer.com/v2/all?access_key=${
-        import.meta.env.VITE_COUNTRY_LAYER_API_KEY
-      }`,
-      { timeout: 3000 },
-    )
-    return response.data
-  } catch (error) {
-    console.log(error)
+const CountryAPI = axios.create({
+  baseURL: "http://api.countrylayer.com/v2",
+  params: {
+    access_key: import.meta.env.VITE_COUNTRY_LAYER_API_KEY,
+  },
+})
+
+const YoutubeAPI = axios.create({
+  baseURL: "https://www.googleapis.com/youtube/v3",
+  params: {
+    key: import.meta.env.VITE_YOUTUBE_API_KEY,
+  },
+})
+
+export type CountryType = {
+  name: string
+  topLevelDomain: string[]
+  alpha2Code: string
+  alpha3Code: string
+  callingCodes: string[]
+  capital: string
+  altSpellings: string[]
+  region: string
+}
+
+export type YouTubeComment = {
+  kind: string
+  etag: string
+  id: string
+  snippet: {
+    videoId: string
+    topLevelComment: {
+      kind: string
+      etag: string
+      id: string
+      snippet: {
+        videoId: string
+        textDisplay: string
+        textOriginal: string
+        authorDisplayName: string
+        authorProfileImageUrl: string
+        authorChannelUrl: string
+        authorChannelId: {
+          value: string
+        }
+        canRate: boolean
+        viewerRating: string
+        likeCount: number
+        publishedAt: string
+        updatedAt: string
+      }
+    }
+    canReply: boolean
+    totalReplyCount: number
+    isPublic: boolean
   }
 }
 
-export const getCountry = async (countryName: string) => {
-  const response = await axios.get(
-    `http://api.countrylayer.com/v2/name/${countryName}?access_key=${
-      import.meta.env.VITE_COUNTRY_LAYER_API_KEY
-    }&fullText=true`,
-    { timeout: 3000 },
+export const getCountries = () => {
+  return CountryAPI.get<CountryType[]>(`/all`, { timeout: 5000 }).then(
+    (response) => response.data,
   )
-  return response.data[0]
 }
 
-export const getYouTubeVideoId = async (countryName: string) => {
-  try {
-    const response = await axios.get(
-      "https://www.googleapis.com/youtube/v3/search",
-      {
-        timeout: 3000,
-        params: {
-          q: `${countryName} travel, best place to visit`,
-          maxResults: 1,
-          key: import.meta.env.VITE_YOUTUBE_API_KEY,
-          type: "video",
-          part: "id",
-        },
-      },
-    )
-    // Extract the video ID from the API response
-    const videoId = response.data.items[0]?.id.videoId
-    return videoId
-  } catch (error) {
-    console.error(error)
-    return null
-  }
+export const getCountry = (countryName: string) => {
+  return CountryAPI.get<CountryType[]>(`/name/${countryName}`, {
+    timeout: 5000,
+    params: {
+      fullText: true,
+    },
+  }).then((response) => response.data?.[0])
 }
 
-export const getYouTubeComments = async (video_id: string) => {
-  try {
-    const response = await axios.get(
-      "https://www.googleapis.com/youtube/v3/commentThreads",
-      {
-        timeout: 3000,
-        params: {
-          key: import.meta.env.VITE_YOUTUBE_API_KEY,
-          textFormat: "plainText",
-          part: "snippet",
-          videoId: `${video_id}`,
-          maxResults: 10,
-        },
-      },
-    )
+export const getYouTubeVideoId = (countryName: string) => {
+  return YoutubeAPI.get(`/search`, {
+    timeout: 5000,
+    params: {
+      q: `${countryName} travel, best place to visit`,
+      maxResults: 1,
+      type: "video",
+      part: "id",
+    },
+  }).then((response) => {
+    console.log(response)
+    return response.data.items[0]?.id.videoId
+  })
+}
+
+export const getYouTubeComments = (video_id: string) => {
+  return YoutubeAPI.get("/commentThreads", {
+    timeout: 5000,
+    params: {
+      textFormat: "plainText",
+      part: "snippet",
+      videoId: `${video_id}`,
+      maxResults: 10,
+    },
+  }).then((response) => {
     const data = response.data.items
     const randomIndex = Math.floor(Math.random() * data.length)
     return data[randomIndex]
-  } catch (error) {
-    console.error(error)
-    return null
-  }
+  })
 }

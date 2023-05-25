@@ -12,7 +12,17 @@ import Countries from "./pages/Countries"
 import Country from "./pages/Country"
 import ErrorPage from "./pages/ErrorPage"
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+      cacheTime: Infinity,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      retry: false,
+    },
+  },
+})
 
 const router = createBrowserRouter(
   createRoutesFromElements(
