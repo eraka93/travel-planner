@@ -1,8 +1,6 @@
 # Project Title
 
-### Travel Planner
-
-### FIND & TRAVEL
+### Travel Planner - FIND & TRAVEL
 
 ## Demo link:
 
@@ -17,12 +15,33 @@ Access my site at [eraka93.github.io](https://eraka93.github.io/)
 
 ## Setup
 
-- download or clone the repository
-- run `cd travel-planner`
-- Note: The project already includes an .env file for easier testing purposes. However, in a production environment, it is recommended to create your own .env file and insert the API key for the Country Layer API and the YouTube Data API.
-- run `npm install`
-- run `npm run dev`
-- open your browser and navigate to `http://localhost:5173` to view the application.
+Follow these steps to set up the project:
+
+1. Download or clone the repository.
+
+2. Navigate to the project directory:
+
+   ```
+   cd travel-planner
+   ```
+
+3. **Note**: The project already includes an `.env` file for easier testing purposes. However, in a production environment, it is recommended to create your own `.env` file and insert the API key for the Country Layer API and the YouTube Data API.
+
+4. Install project dependencies:
+
+   ```
+   npm install
+   ```
+
+5. Start the development server:
+
+   ```
+   npm run dev
+   ```
+
+6. Open your browser and visit `http://localhost:5173` to view the application.
+
+Now you're all set up and ready to use the "Travel Planner" application!
 
 ## About The App
 
