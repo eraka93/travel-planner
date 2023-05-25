@@ -4,7 +4,7 @@ import "./Home.css"
 function Home() {
   return (
     <div className="container">
-      <h2>Welcome to the our planner app.</h2>
+      <h2>Welcome to the planner app.</h2>
       <h1>FIND & TRAVEL</h1>
       <h4>Place where you can explore and plan your next adventure!</h4>
       <p>Start by selecting a country from the list below:</p>
