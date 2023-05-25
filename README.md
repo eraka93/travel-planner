@@ -1,6 +1,8 @@
-# Project Title
+# Travel Planner - FIND & TRAVEL
 
-### Travel Planner - FIND & TRAVEL
+Welcome to the Travel Planner - FIND & TRAVEL project!
+
+This application allows you to plan your travel adventures by exploring countries, accessing essential information, watching destination videos, and leaving comments. It's a convenient tool to discover new places and share your travel experiences.
 
 ## Demo link:
 
@@ -18,27 +20,19 @@ Access my site at [eraka93.github.io](https://eraka93.github.io/)
 Follow these steps to set up the project:
 
 1. Download or clone the repository.
-
 2. Navigate to the project directory:
-
    ```
    cd travel-planner
    ```
-
 3. **Note**: The project already includes an `.env` file for easier testing purposes. However, in a production environment, it is recommended to create your own `.env` file and insert the API key for the Country Layer API and the YouTube Data API.
-
 4. Install project dependencies:
-
    ```
    npm install
    ```
-
 5. Start the development server:
-
    ```
    npm run dev
    ```
-
 6. Open your browser and visit `http://localhost:5173` to view the application.
 
 Now you're all set up and ready to use the "Travel Planner" application!
@@ -75,3 +69,45 @@ Technologies Used
 - `TypeScript` : A statically typed superset of JavaScript for enhanced code quality.
 - `HTML` : The foundation of the application's user interface, providing the structure and markup for the different pages and components.
 - `CSS` : Used to enhance styling and layout.
+
+## Project Structure
+
+The project structure of the Travel Planner - FIND & TRAVEL application is as follows:
+
+```
+travel-planner/
+  ├── src/
+  │   ├── components/
+  │   │   ├── Comments.css
+  │   │   ├── Comments.tsx
+  │   │   ├── Loading.tsx
+  │   │   ├── Loading.css
+  │   ├── pages/
+  │   │   ├── Countries.css
+  │   │   ├── Countries.tsx
+  │   │   ├── Country.css
+  │   │   ├── Country.tsx
+  │   │   ├── ErrorPage.css
+  │   │   ├── ErrorPage.tsx
+  │   │   ├── Home.css
+  │   │   ├── Home.tsx
+  │   ├── services/
+  │   │   ├── api.tsx
+  │   ├── app/
+  │   │   ├── store.ts
+  │   ├── App.tsx
+  │   ├── index.css
+  │   ├── main.tsx
+  │   ├── vite-env.d.ts
+  ├── .env
+  ├── .gitignore
+  ├── index.html
+  ├── package.json
+  ├── package-lock.json
+  ├── README.md
+  ├── tsconfig.json
+  ├── tsconfig.node.json
+  └── vite.config.js
+```
+
+This structure represents the organization of Travel Planner project, with directories such as `src/`, `components/`, `pages/`, `services/`, `app/`, and various files like `index.html`, `App.tsx`, `index.html`, `.env`, and more.
