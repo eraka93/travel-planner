@@ -13,6 +13,7 @@ Access my site at [eraka93.github.io](https://eraka93.github.io/)
 - [Setup](#setup)
 - [About The App](#about-the-app)
 - [Technologies](#technologies)
+- [Architecture](#architecture)
 - [Project Structure](#structure)
 - [Data Flow](#data-flow)
 
@@ -70,6 +71,24 @@ Technologies Used
 - `TypeScript` : A statically typed superset of JavaScript for enhanced code quality.
 - `HTML` : The foundation of the application's user interface, providing the structure and markup for the different pages and components.
 - `CSS` : Used to enhance styling and layout.
+
+## Architecture
+
+The "Travel Planner - FIND & TRAVEL" application follows a component-based architecture using React and Redux. It is designed to provide a seamless user experience for planning travel adventures. The application consists of the following main components:
+
+1. **App**: The entry point of the application that handles routing and renders other components based on the current URL.
+
+2. **Home Page**: Renders the home page, displaying a list of countries available for exploration.
+
+3. **Countries Page**: Displays a list of all countries, allowing users to click on a specific country to view more detailed information.
+
+4. **Country Page**: Shows essential information about a specific country, including basic details and a YouTube video showcasing popular destinations in that country.
+
+5. **Error Page**: Displays an error page when there is an issue with fetching data or encountering an error during the user's interaction with the application.
+
+6. **Comments Component**: Enables users to leave comments and share their travel experiences related to a particular country.
+
+7. **Loading Component**: Displays a loading spinner while data is being fetched from external APIs.
 
 ## Project Structure
 
