@@ -73,6 +73,8 @@ export const getCountry = (countryName: string) => {
   }).then((response) => response.data?.[0])
 }
 
+/* function sends a request to the YouTube API search endpoint, searching for travel-related videos in the specified country. 
+It retrieves the video ID of the first result and returns it. */
 export const getYouTubeVideoId = (countryName: string) => {
   return YoutubeAPI.get(`/search`, {
     timeout: 5000,
@@ -88,6 +90,8 @@ export const getYouTubeVideoId = (countryName: string) => {
   })
 }
 
+/* function sends a request to the YouTube API's commentThreads endpoint, retrieving comment threads for a specific video. 
+It randomly selects one comment thread from the response data and returns it. */
 export const getYouTubeComments = (video_id: string) => {
   return YoutubeAPI.get("/commentThreads", {
     timeout: 5000,
